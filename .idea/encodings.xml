@@ -4,7 +4,10 @@
     <file url="file://$PROJECT_DIR$/../../../../Windows/System32/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket-application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-controller/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket-infrastructure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-start/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ticket-start/src/main/resources" charset="UTF-8" />
   </component>

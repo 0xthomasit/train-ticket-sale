@@ -10,21 +10,13 @@
       <relativePath>../pom.xml</relativePath>
    </parent>
 
-   <artifactId>ticket-controller</artifactId>
-   <name>ticket-controller</name>
+   <artifactId>ticket-application</artifactId>
+   <name>ticket-application</name>
 
    <properties>
       <maven.compiler.source>25</maven.compiler.source>
       <maven.compiler.target>25</maven.compiler.target>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
-
-   <dependencies>
-      <dependency>
-         <groupId>com.ion</groupId>
-         <artifactId>ticket-application</artifactId>
-         <version>${revision}</version>
-      </dependency>
-   </dependencies>
 
 </project>
