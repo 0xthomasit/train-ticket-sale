@@ -1,10 +1,10 @@
 server:
-    port: 1122
-    tomcat:
-      mbeanregistry:
-        enabled: true # Bật để hiển thị metrics về threads
-      threads: # Each thread to handle each request (take thread from thread pool).
-        max: 10 #(worker threads) tối đa máy chủ nhúng Tomcat có thể tạo ra để xử lý các HTTP requests đồng thời.
+  port: 1122
+  tomcat:
+    mbeanregistry:
+      enabled: true # Bật để hiển thị metrics về threads
+    threads: # Each thread to handle each request (take thread from thread pool).
+      max: 10 #(worker threads) tối đa máy chủ nhúng Tomcat có thể tạo ra để xử lý các HTTP requests đồng thời.
 
 logging:
   pattern:
@@ -23,3 +23,16 @@ management:
   endpoint:
     metrics:
       access: unrestricted # Bật tính năng đo lường (metrics)
+
+resilience4j.ratelimiter:
+  instances:
+    backendA:
+      limitForPeriod: 2 # Tối đa 2 requests/s được cho phép
+      limitRefreshPeriod: 10s # Sau mỗi 10s, system lại cho phép xử lý 2 requests
+      timeoutDuration: 0 # T.gian chờ tối đa trong mỗi yêu cầu (=0: các request đạt giới hạn sẽ bị reject mà ko cần chờ đợi)
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+    backendB:
+      limitForPeriod: 5
+      limitRefreshPeriod: 500ms
+      timeoutDuration: 3s

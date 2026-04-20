@@ -1,6 +1,7 @@
 package com.ion.ddd.controller.http;
 
 import com.ion.ddd.application.service.event.EventAppService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +19,28 @@ public class HiController {
     private EventAppService eventAppService;
 
     @GetMapping("/hi")
+    @RateLimiter(name = "backendA", fallbackMethod = "fallbackHello") // In 10s, surpass 2 requests -> fallbackHello
     public String hello() {
         return eventAppService.sayHi("Thomas");
     }
 
+    public String fallbackHello(Throwable throwable) {
+        return "Too many requests!";
+    }
+
     @GetMapping("/hi/v1")
+    @RateLimiter(name = "backendB", fallbackMethod = "fallbackHello")
     public String sayHi() {
         return eventAppService.sayHi("Mary");
     }
 
-    @GetMapping("/test-load")
-    public String testLoad() throws InterruptedException {
-        log.info("Request nhận bởi: {}", Thread.currentThread().getName());
-        // Giữ thread này bận trong 3 giây
-        Thread.sleep(3000);
-        log.info("Request xử lý xong bởi: {}", Thread.currentThread().getName());
-        return "Xử lý xong bởi: " + Thread.currentThread().getName();
-    }
+//    @GetMapping("/test-load")
+//    public String testLoad() throws InterruptedException {
+//        log.info("Request nhận bởi: {}", Thread.currentThread().getName());
+//        // Giữ thread này bận trong 3 giây
+//        Thread.sleep(3000);
+//        log.info("Request xử lý xong bởi: {}", Thread.currentThread().getName());
+//        return "Xử lý xong bởi: " + Thread.currentThread().getName();
+//    }
 
 }
