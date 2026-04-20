@@ -1,2 +1,25 @@
 server:
     port: 1122
+    tomcat:
+      mbeanregistry:
+        enabled: true # Bật để hiển thị metrics về threads
+      threads: # Each thread to handle each request (take thread from thread pool).
+        max: 10 #(worker threads) tối đa máy chủ nhúng Tomcat có thể tạo ra để xử lý các HTTP requests đồng thời.
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n" # Định dạng log trong file
+  file:
+    name: logs/app.log # File log sẽ được lưu tại thư mục 'logs' trong thư mục gốc của dự án
+  level:
+    org.apache.tomcat.util.threads: DEBUG # (Tùy chọn) Xem cách Tomcat quản lý threads
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "metrics" # Allow to display endpoint /actuator/metrics on Web.
+  endpoint:
+    metrics:
+      access: unrestricted # Bật tính năng đo lường (metrics)
